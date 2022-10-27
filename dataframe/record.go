@@ -13,7 +13,7 @@ func NewRecord() Record {
 	return map[series.Name]element.Element{}
 }
 
-// GetSeriesNames NOTICE: this method does not guarantee the order of series names
+// GetSeriesNames does not guarantee the order of series names
 func (r Record) GetSeriesNames() []series.Name {
 	names := make([]series.Name, 0, len(r))
 	for name := range r {

@@ -92,7 +92,8 @@ func (columns Columns) FindSeriesBy(name series.Name, method series.AggregationM
 	return series.Series{}, fmt.Errorf("series name not found in columns, name: %s", name)
 }
 
-// Replace NOTICE: length of replacing series and length of other columns can be inconsistent
+// Replace column by index.
+// Length of replacing series and length of other columns can be inconsistent
 func (columns Columns) Replace(index int, series series.Series) (Columns, error) {
 	if !columns.isValidIndex(index) {
 		return nil, fmt.Errorf("index out of range, index: %d", index)
@@ -101,7 +102,8 @@ func (columns Columns) Replace(index int, series series.Series) (Columns, error)
 	return columns, nil
 }
 
-// ReplaceByName NOTICE: length of replacing series and length of other columns can be inconsistent
+// ReplaceByName replace column by its name.
+// Length of replacing series and length of other columns can be inconsistent
 func (columns Columns) ReplaceByName(s series.Series) (Columns, error) {
 	for i, nameInColumns := range columns.Names() {
 		if nameInColumns == s.GetName() {
