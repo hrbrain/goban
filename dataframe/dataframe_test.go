@@ -382,15 +382,15 @@ func TestDataFrame_GroupBy(t *testing.T) {
 							Name: "series_1",
 							Elements: element.StringElements{
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "営業部",
+									Value:  "Orange",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 							},
@@ -405,18 +405,18 @@ func TestDataFrame_GroupBy(t *testing.T) {
 			want: []Group{
 				{
 					SeriesName: "series_1",
-					Element:    element.StringElement{Value: "開発部"},
+					Element:    element.StringElement{Value: "Apple"},
 					DataFrame: DataFrame{
 						Columns: []series.Series{
 							{
 								Name: "series_1",
 								Elements: element.StringElements{
 									element.StringElement{
-										Value:  "開発部",
+										Value:  "Apple",
 										IsNull: false,
 									},
 									element.StringElement{
-										Value:  "開発部",
+										Value:  "Apple",
 										IsNull: false,
 									},
 								},
@@ -427,14 +427,14 @@ func TestDataFrame_GroupBy(t *testing.T) {
 				},
 				{
 					SeriesName: "series_1",
-					Element:    element.StringElement{Value: "営業部"},
+					Element:    element.StringElement{Value: "Orange"},
 					DataFrame: DataFrame{
 						Columns: []series.Series{
 							{
 								Name: "series_1",
 								Elements: element.StringElements{
 									element.StringElement{
-										Value:  "営業部",
+										Value:  "Orange",
 										IsNull: false,
 									},
 								},
@@ -706,15 +706,15 @@ func TestDataFrame_Records(t *testing.T) {
 							Name: "series_1",
 							Elements: element.StringElements{
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "営業部",
+									Value:  "Orange",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 							},
@@ -726,19 +726,19 @@ func TestDataFrame_Records(t *testing.T) {
 			want: Records{
 				{
 					"series_1": element.StringElement{
-						Value:  "開発部",
+						Value:  "Apple",
 						IsNull: false,
 					},
 				},
 				{
 					"series_1": element.StringElement{
-						Value:  "営業部",
+						Value:  "Orange",
 						IsNull: false,
 					},
 				},
 				{
 					"series_1": element.StringElement{
-						Value:  "開発部",
+						Value:  "Apple",
 						IsNull: false,
 					},
 				},
@@ -754,15 +754,15 @@ func TestDataFrame_Records(t *testing.T) {
 							Name: "series_1",
 							Elements: element.StringElements{
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "営業部",
+									Value:  "Orange",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 							},
@@ -791,7 +791,7 @@ func TestDataFrame_Records(t *testing.T) {
 			want: Records{
 				{
 					"series_1": element.StringElement{
-						Value:  "開発部",
+						Value:  "Apple",
 						IsNull: false,
 					},
 					"series_2": element.NumericElement{
@@ -801,7 +801,7 @@ func TestDataFrame_Records(t *testing.T) {
 				},
 				{
 					"series_1": element.StringElement{
-						Value:  "営業部",
+						Value:  "Orange",
 						IsNull: false,
 					},
 					"series_2": element.NumericElement{
@@ -811,7 +811,7 @@ func TestDataFrame_Records(t *testing.T) {
 				},
 				{
 					"series_1": element.StringElement{
-						Value:  "開発部",
+						Value:  "Apple",
 						IsNull: false,
 					},
 					"series_2": element.NumericElement{
@@ -862,11 +862,11 @@ func TestDataFrame_LoadRecord(t *testing.T) {
 							Name: "series_1",
 							Elements: element.StringElements{
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "営業部",
+									Value:  "Orange",
 									IsNull: false,
 								},
 							},
@@ -878,7 +878,7 @@ func TestDataFrame_LoadRecord(t *testing.T) {
 			args: args{
 				Record{
 					"series_1": element.StringElement{
-						Value:  "開発部",
+						Value:  "Apple",
 						IsNull: false,
 					},
 				},
@@ -889,15 +889,15 @@ func TestDataFrame_LoadRecord(t *testing.T) {
 						Name: "series_1",
 						Elements: element.StringElements{
 							element.StringElement{
-								Value:  "開発部",
+								Value:  "Apple",
 								IsNull: false,
 							},
 							element.StringElement{
-								Value:  "営業部",
+								Value:  "Orange",
 								IsNull: false,
 							},
 							element.StringElement{
-								Value:  "開発部",
+								Value:  "Apple",
 								IsNull: false,
 							},
 						},
@@ -916,11 +916,11 @@ func TestDataFrame_LoadRecord(t *testing.T) {
 							Name: "series_1",
 							Elements: element.StringElements{
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "営業部",
+									Value:  "Orange",
 									IsNull: false,
 								},
 							},
@@ -949,7 +949,7 @@ func TestDataFrame_LoadRecord(t *testing.T) {
 						IsNull: false,
 					},
 					"series_1": element.StringElement{
-						Value:  "開発部",
+						Value:  "Apple",
 						IsNull: false,
 					},
 				},
@@ -960,15 +960,15 @@ func TestDataFrame_LoadRecord(t *testing.T) {
 						Name: "series_1",
 						Elements: element.StringElements{
 							element.StringElement{
-								Value:  "開発部",
+								Value:  "Apple",
 								IsNull: false,
 							},
 							element.StringElement{
-								Value:  "営業部",
+								Value:  "Orange",
 								IsNull: false,
 							},
 							element.StringElement{
-								Value:  "開発部",
+								Value:  "Apple",
 								IsNull: false,
 							},
 						},
@@ -1004,11 +1004,11 @@ func TestDataFrame_LoadRecord(t *testing.T) {
 							Name: "series_1",
 							Elements: element.StringElements{
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "営業部",
+									Value:  "Orange",
 									IsNull: false,
 								},
 							},
@@ -1039,7 +1039,7 @@ func TestDataFrame_LoadRecord(t *testing.T) {
 						IsNull: false,
 					},
 					"series_1": element.StringElement{
-						Value:  "開発部",
+						Value:  "Apple",
 						IsNull: false,
 					},
 				},
@@ -1153,11 +1153,11 @@ func TestDataFrame_LoadRecords(t *testing.T) {
 							Name: "series_1",
 							Elements: element.StringElements{
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "営業部",
+									Value:  "Orange",
 									IsNull: false,
 								},
 							},
@@ -1187,7 +1187,7 @@ func TestDataFrame_LoadRecords(t *testing.T) {
 							IsNull: false,
 						},
 						"series_1": element.StringElement{
-							Value:  "開発部",
+							Value:  "Apple",
 							IsNull: false,
 						},
 					},
@@ -1197,7 +1197,7 @@ func TestDataFrame_LoadRecords(t *testing.T) {
 							IsNull: false,
 						},
 						"series_1": element.StringElement{
-							Value:  "総務部",
+							Value:  "Banana",
 							IsNull: false,
 						},
 					},
@@ -1209,19 +1209,19 @@ func TestDataFrame_LoadRecords(t *testing.T) {
 						Name: "series_1",
 						Elements: element.StringElements{
 							element.StringElement{
-								Value:  "開発部",
+								Value:  "Apple",
 								IsNull: false,
 							},
 							element.StringElement{
-								Value:  "営業部",
+								Value:  "Orange",
 								IsNull: false,
 							},
 							element.StringElement{
-								Value:  "開発部",
+								Value:  "Apple",
 								IsNull: false,
 							},
 							element.StringElement{
-								Value:  "総務部",
+								Value:  "Banana",
 								IsNull: false,
 							},
 						},
@@ -1292,11 +1292,11 @@ func TestDataFrame_Append(t *testing.T) {
 							Name: "series_1",
 							Elements: element.StringElements{
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "営業部",
+									Value:  "Orange",
 									IsNull: false,
 								},
 							},
@@ -1327,11 +1327,11 @@ func TestDataFrame_Append(t *testing.T) {
 							Name: "series_1",
 							Elements: element.StringElements{
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "総務部",
+									Value:  "Banana",
 									IsNull: false,
 								},
 							},
@@ -1360,19 +1360,19 @@ func TestDataFrame_Append(t *testing.T) {
 						Name: "series_1",
 						Elements: element.StringElements{
 							element.StringElement{
-								Value:  "開発部",
+								Value:  "Apple",
 								IsNull: false,
 							},
 							element.StringElement{
-								Value:  "営業部",
+								Value:  "Orange",
 								IsNull: false,
 							},
 							element.StringElement{
-								Value:  "開発部",
+								Value:  "Apple",
 								IsNull: false,
 							},
 							element.StringElement{
-								Value:  "総務部",
+								Value:  "Banana",
 								IsNull: false,
 							},
 						},
@@ -1414,11 +1414,11 @@ func TestDataFrame_Append(t *testing.T) {
 							Name: "series_1",
 							Elements: element.StringElements{
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "営業部",
+									Value:  "Orange",
 									IsNull: false,
 								},
 							},
@@ -1449,11 +1449,11 @@ func TestDataFrame_Append(t *testing.T) {
 							Name: "series_1",
 							Elements: element.StringElements{
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "総務部",
+									Value:  "Banana",
 									IsNull: false,
 								},
 							},
@@ -1482,19 +1482,19 @@ func TestDataFrame_Append(t *testing.T) {
 						Name: "series_1",
 						Elements: element.StringElements{
 							element.StringElement{
-								Value:  "開発部",
+								Value:  "Apple",
 								IsNull: false,
 							},
 							element.StringElement{
-								Value:  "営業部",
+								Value:  "Orange",
 								IsNull: false,
 							},
 							element.StringElement{
-								Value:  "開発部",
+								Value:  "Apple",
 								IsNull: false,
 							},
 							element.StringElement{
-								Value:  "総務部",
+								Value:  "Banana",
 								IsNull: false,
 							},
 						},
@@ -1536,11 +1536,11 @@ func TestDataFrame_Append(t *testing.T) {
 							Name: "series_1",
 							Elements: element.StringElements{
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "営業部",
+									Value:  "Orange",
 									IsNull: false,
 								},
 							},
@@ -1582,11 +1582,11 @@ func TestDataFrame_Append(t *testing.T) {
 							Name: "series_1",
 							Elements: element.StringElements{
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "総務部",
+									Value:  "Banana",
 									IsNull: false,
 								},
 							},
@@ -1619,11 +1619,11 @@ func TestDataFrame_Append(t *testing.T) {
 							Name: "series_1",
 							Elements: element.StringElements{
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "営業部",
+									Value:  "Orange",
 									IsNull: false,
 								},
 							},
@@ -1652,11 +1652,11 @@ func TestDataFrame_Append(t *testing.T) {
 							Name: "series_1",
 							Elements: element.StringElements{
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "総務部",
+									Value:  "Banana",
 									IsNull: false,
 								},
 							},
@@ -1802,15 +1802,15 @@ func TestDataFrame_Aggregate(t *testing.T) {
 							Name: "series_1",
 							Elements: element.StringElements{
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "営業部",
+									Value:  "Orange",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 							},
@@ -1854,15 +1854,15 @@ func TestDataFrame_Aggregate(t *testing.T) {
 							Name: "series_1",
 							Elements: element.StringElements{
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 							},
@@ -1890,7 +1890,7 @@ func TestDataFrame_Aggregate(t *testing.T) {
 						Name: "series_1",
 						Elements: element.StringElements{
 							element.StringElement{
-								Value:  "開発部",
+								Value:  "Apple",
 								IsNull: false,
 							},
 						},
@@ -1920,15 +1920,15 @@ func TestDataFrame_Aggregate(t *testing.T) {
 							Name: "series_1",
 							Elements: element.StringElements{
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "営業部",
+									Value:  "Orange",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 							},
@@ -2004,15 +2004,15 @@ func TestDataFrame_Aggregate(t *testing.T) {
 							Name: "series_1",
 							Elements: element.StringElements{
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "営業部",
+									Value:  "Orange",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 							},
@@ -2064,15 +2064,15 @@ func TestDataFrame_Aggregate(t *testing.T) {
 							Name: "series_1",
 							Elements: element.StringElements{
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "営業部",
+									Value:  "Orange",
 									IsNull: false,
 								},
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 							},
@@ -2133,7 +2133,7 @@ func TestDataFrame_DropNA(t *testing.T) {
 							Name: "series_1",
 							Elements: element.StringElements{
 								element.StringElement{
-									Value:  "開発部",
+									Value:  "Apple",
 									IsNull: false,
 								},
 								element.StringElement{
@@ -2141,7 +2141,7 @@ func TestDataFrame_DropNA(t *testing.T) {
 									IsNull: true,
 								},
 								element.StringElement{
-									Value:  "営業部",
+									Value:  "Orange",
 									IsNull: false,
 								},
 							},
@@ -2173,7 +2173,7 @@ func TestDataFrame_DropNA(t *testing.T) {
 						Name: "series_1",
 						Elements: element.StringElements{
 							element.StringElement{
-								Value:  "開発部",
+								Value:  "Apple",
 								IsNull: false,
 							},
 						},
