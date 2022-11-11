@@ -29,10 +29,12 @@ func (r Record) Has(n series.Name) bool {
 	return false
 }
 
-func (r Record) HasNAElement() bool {
-	names := r.GetSeriesNames()
+func (r Record) HasNAElement(names ...series.Name) bool {
+	if len(names) == 0 {
+		names = r.GetSeriesNames()
+	}
 	for _, name := range names {
-		if r[name].IsNA() {
+		if v, ok := r[name]; ok && v.IsNA() {
 			return true
 		}
 	}

@@ -1,7 +1,6 @@
 package element
 
 import (
-	"errors"
 	"fmt"
 	"strings"
 )
@@ -21,9 +20,9 @@ func (se StringElement) Float() (float64, error) {
 }
 
 // String convert string element to string
-func (se StringElement) String(_ bool) (string, error) {
+func (se StringElement) String() (string, error) {
 	if se.IsNA() {
-		return "", errors.New("can't convert NA to string")
+		return "", nil
 	}
 	return se.Value, nil
 }

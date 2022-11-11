@@ -219,7 +219,7 @@ func (df DataFrame) Aggregate(conditions AggregationConditions) (DataFrame, erro
 }
 
 // DropNA Drop rows that have NA values
-func (df DataFrame) DropNA() (DataFrame, error) {
+func (df DataFrame) DropNA(names ...series.Name) (DataFrame, error) {
 	records, err := df.Records()
 	if err != nil {
 		return DataFrame{}, errors.Wrap(err, "failed to convert dataframe to records")
@@ -228,7 +228,7 @@ func (df DataFrame) DropNA() (DataFrame, error) {
 	// Loop over each record and drop records with null element
 	newRecords := NewRecords(nil)
 	for _, r := range records {
-		if r.HasNAElement() {
+		if r.HasNAElement(names...) {
 			continue
 		}
 		newRecords = newRecords.Append(r)

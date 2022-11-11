@@ -47,7 +47,6 @@ func TestRecord_GetSeriesNames(t *testing.T) {
 			}
 		})
 	}
-
 }
 
 func TestRecord_AddField(t *testing.T) {
@@ -280,7 +279,7 @@ func TestRecord_HasNAElement(t *testing.T) {
 		Record
 	}
 	type args struct {
-		name series.Name
+		names []series.Name
 	}
 	tests := []struct {
 		name string
@@ -289,7 +288,7 @@ func TestRecord_HasNAElement(t *testing.T) {
 		want bool
 	}{
 		{
-			name: "pass",
+			name: "pass (contains NA elements)",
 			fields: fields{
 				Record{
 					"series_1": element.StringElement{
@@ -303,14 +302,74 @@ func TestRecord_HasNAElement(t *testing.T) {
 				},
 			},
 			args: args{
-				name: "series_2",
+				names: []series.Name{
+					"series_2",
+				},
 			},
 			want: true,
+		},
+		{
+			name: "pass (not contains NA elements)",
+			fields: fields{
+				Record{
+					"series_1": element.StringElement{
+						Value:  "abc",
+						IsNull: false,
+					},
+					"series_2": element.NumericElement{
+						Value:  math.NaN(),
+						IsNull: true,
+					},
+				},
+			},
+			args: args{
+				names: []series.Name{
+					"series_1",
+				},
+			},
+			want: false,
+		},
+		{
+			name: "pass (no arguments)",
+			fields: fields{
+				Record{
+					"series_1": element.StringElement{
+						Value:  "abc",
+						IsNull: false,
+					},
+					"series_2": element.NumericElement{
+						Value:  math.NaN(),
+						IsNull: true,
+					},
+				},
+			},
+			want: true,
+		},
+		{
+			name: "pass (unexpected name)",
+			fields: fields{
+				Record{
+					"series_1": element.StringElement{
+						Value:  "abc",
+						IsNull: false,
+					},
+					"series_2": element.NumericElement{
+						Value:  math.NaN(),
+						IsNull: true,
+					},
+				},
+			},
+			args: args{
+				names: []series.Name{
+					"xxx",
+				},
+			},
+			want: false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := tt.Record.HasNAElement()
+			got := tt.Record.HasNAElement(tt.args.names...)
 			if diff := cmp.Diff(got, tt.want); diff != "" {
 				t.Errorf(diff)
 			}
