@@ -390,13 +390,21 @@ func TestDataFrame_GroupBy(t *testing.T) {
 									IsNull: false,
 								},
 								element.StringElement{
+									Value:  "",
+									IsNull: true,
+								},
+								element.StringElement{
 									Value:  "Apple",
 									IsNull: false,
+								},
+								element.StringElement{
+									Value:  "",
+									IsNull: true,
 								},
 							},
 						},
 					},
-					RecordCount: 3,
+					RecordCount: 5,
 				},
 			},
 			args: args{
@@ -443,6 +451,22 @@ func TestDataFrame_GroupBy(t *testing.T) {
 						RecordCount: 1,
 					},
 				},
+				{
+					SeriesName: "series_1",
+					Element:    element.StringElement{IsNull: true},
+					DataFrame: DataFrame{
+						Columns: []series.Series{
+							{
+								Name: "series_1",
+								Elements: element.StringElements{
+									{IsNull: true},
+									{IsNull: true},
+								},
+							},
+						},
+						RecordCount: 2,
+					},
+				},
 			},
 			wantErr: false,
 		},
@@ -463,13 +487,19 @@ func TestDataFrame_GroupBy(t *testing.T) {
 									IsNull: false,
 								},
 								element.NumericElement{
+									IsNull: true,
+								},
+								element.NumericElement{
 									Value:  1,
 									IsNull: false,
+								},
+								element.NumericElement{
+									IsNull: true,
 								},
 							},
 						},
 					},
-					RecordCount: 3,
+					RecordCount: 5,
 				},
 			},
 			args: args{
@@ -516,6 +546,26 @@ func TestDataFrame_GroupBy(t *testing.T) {
 						RecordCount: 1,
 					},
 				},
+				{
+					SeriesName: "series_1",
+					Element:    element.NumericElement{IsNull: true},
+					DataFrame: DataFrame{
+						Columns: []series.Series{
+							{
+								Name: "series_1",
+								Elements: element.NumericElements{
+									element.NumericElement{
+										IsNull: true,
+									},
+									element.NumericElement{
+										IsNull: true,
+									},
+								},
+							},
+						},
+						RecordCount: 2,
+					},
+				},
 			},
 			wantErr: false,
 		},
@@ -536,7 +586,15 @@ func TestDataFrame_GroupBy(t *testing.T) {
 									IsNull: false,
 								},
 								element.NumericElement{
+									Value:  3,
+									IsNull: false,
+								},
+								element.NumericElement{
 									Value:  1,
+									IsNull: false,
+								},
+								element.NumericElement{
+									Value:  3,
 									IsNull: false,
 								},
 							},
@@ -553,8 +611,14 @@ func TestDataFrame_GroupBy(t *testing.T) {
 									IsNull: false,
 								},
 								element.StringElement{
+									IsNull: true,
+								},
+								element.StringElement{
 									Value:  "aaa",
 									IsNull: false,
+								},
+								element.StringElement{
+									IsNull: true,
 								},
 							},
 						},
@@ -570,13 +634,21 @@ func TestDataFrame_GroupBy(t *testing.T) {
 									IsNull: false,
 								},
 								element.NumericElement{
+									Value:  66,
+									IsNull: false,
+								},
+								element.NumericElement{
 									Value:  77,
+									IsNull: false,
+								},
+								element.NumericElement{
+									Value:  55,
 									IsNull: false,
 								},
 							},
 						},
 					},
-					RecordCount: 3,
+					RecordCount: 5,
 				},
 			},
 			args: args{
@@ -667,6 +739,52 @@ func TestDataFrame_GroupBy(t *testing.T) {
 						RecordCount: 1,
 					},
 				},
+				{
+					SeriesName: "series_2",
+					Element:    element.StringElement{IsNull: true},
+					DataFrame: DataFrame{
+						Columns: []series.Series{
+							{
+								Name: "series_1",
+								Elements: element.NumericElements{
+									element.NumericElement{
+										Value:  3,
+										IsNull: false,
+									},
+									element.NumericElement{
+										Value:  3,
+										IsNull: false,
+									},
+								},
+							},
+							{
+								Name: "series_2",
+								Elements: element.StringElements{
+									element.StringElement{
+										IsNull: true,
+									},
+									element.StringElement{
+										IsNull: true,
+									},
+								},
+							},
+							{
+								Name: "series_3",
+								Elements: element.NumericElements{
+									element.NumericElement{
+										Value:  66,
+										IsNull: false,
+									},
+									element.NumericElement{
+										Value:  55,
+										IsNull: false,
+									},
+								},
+							},
+						},
+						RecordCount: 2,
+					},
+				},
 			},
 			wantErr: false,
 		},
@@ -683,7 +801,6 @@ func TestDataFrame_GroupBy(t *testing.T) {
 				t.Log(err)
 			}
 		})
-
 	}
 }
 
@@ -835,7 +952,6 @@ func TestDataFrame_Records(t *testing.T) {
 				t.Log(err)
 			}
 		})
-
 	}
 }
 
@@ -1126,7 +1242,6 @@ func TestDataFrame_LoadRecord(t *testing.T) {
 				t.Log(err)
 			}
 		})
-
 	}
 }
 
@@ -1265,7 +1380,6 @@ func TestDataFrame_LoadRecords(t *testing.T) {
 				t.Log(err)
 			}
 		})
-
 	}
 }
 
@@ -1693,7 +1807,6 @@ func TestDataFrame_Append(t *testing.T) {
 				t.Log(err)
 			}
 		})
-
 	}
 }
 
@@ -2110,22 +2223,25 @@ func TestDataFrame_Aggregate(t *testing.T) {
 				t.Log(err)
 			}
 		})
-
 	}
 }
 
 func TestDataFrame_DropNA(t *testing.T) {
+	type args struct {
+		names []series.Name
+	}
 	type fields struct {
 		DataFrame
 	}
 	tests := []struct {
 		name string
 		fields
+		args    args
 		want    DataFrame
 		wantErr bool
 	}{
 		{
-			name: "pass",
+			name: "drop all series",
 			fields: fields{
 				DataFrame{
 					Columns: []series.Series{
@@ -2192,11 +2308,166 @@ func TestDataFrame_DropNA(t *testing.T) {
 			},
 			wantErr: false,
 		},
+		{
+			name: "drop specific all series",
+			fields: fields{
+				DataFrame{
+					Columns: []series.Series{
+						{
+							Name: "series_1",
+							Elements: element.StringElements{
+								element.StringElement{
+									Value:  "Apple",
+									IsNull: false,
+								},
+								element.StringElement{
+									Value:  "",
+									IsNull: true,
+								},
+								element.StringElement{
+									Value:  "Orange",
+									IsNull: false,
+								},
+							},
+						},
+						{
+							Name: "series_2",
+							Elements: element.NumericElements{
+								element.NumericElement{
+									Value:  20,
+									IsNull: false,
+								},
+								element.NumericElement{
+									Value:  30,
+									IsNull: false,
+								},
+								element.NumericElement{
+									Value:  0,
+									IsNull: true,
+								},
+							},
+						},
+					},
+					RecordCount: 3,
+				},
+			},
+			args: args{
+				names: []series.Name{
+					"series_1",
+					"series_2",
+				},
+			},
+			want: DataFrame{
+				Columns: []series.Series{
+					{
+						Name: "series_1",
+						Elements: element.StringElements{
+							element.StringElement{
+								Value:  "Apple",
+								IsNull: false,
+							},
+						},
+					},
+					{
+						Name: "series_2",
+						Elements: element.NumericElements{
+							element.NumericElement{
+								Value:  20,
+								IsNull: false,
+							},
+						},
+					},
+				},
+				RecordCount: 1,
+			},
+			wantErr: false,
+		},
+		{
+			name: "drop specific series",
+			fields: fields{
+				DataFrame{
+					Columns: []series.Series{
+						{
+							Name: "series_1",
+							Elements: element.StringElements{
+								element.StringElement{
+									Value:  "Apple",
+									IsNull: false,
+								},
+								element.StringElement{
+									Value:  "",
+									IsNull: true,
+								},
+								element.StringElement{
+									Value:  "Orange",
+									IsNull: false,
+								},
+							},
+						},
+						{
+							Name: "series_2",
+							Elements: element.NumericElements{
+								element.NumericElement{
+									Value:  20,
+									IsNull: false,
+								},
+								element.NumericElement{
+									Value:  30,
+									IsNull: false,
+								},
+								element.NumericElement{
+									Value:  0,
+									IsNull: true,
+								},
+							},
+						},
+					},
+					RecordCount: 3,
+				},
+			},
+			args: args{
+				names: []series.Name{
+					"series_2",
+				},
+			},
+			want: DataFrame{
+				Columns: []series.Series{
+					{
+						Name: "series_1",
+						Elements: element.StringElements{
+							element.StringElement{
+								Value:  "Apple",
+								IsNull: false,
+							},
+							element.StringElement{
+								Value:  "",
+								IsNull: true,
+							},
+						},
+					},
+					{
+						Name: "series_2",
+						Elements: element.NumericElements{
+							element.NumericElement{
+								Value:  20,
+								IsNull: false,
+							},
+							element.NumericElement{
+								Value:  30,
+								IsNull: false,
+							},
+						},
+					},
+				},
+				RecordCount: 2,
+			},
+			wantErr: false,
+		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := tt.fields.DataFrame.DropNA()
+			got, err := tt.fields.DataFrame.DropNA(tt.args.names...)
 			if diff := cmp.Diff(got, tt.want); diff != "" {
 				t.Errorf(diff)
 			}
@@ -2205,6 +2476,5 @@ func TestDataFrame_DropNA(t *testing.T) {
 				t.Log(err)
 			}
 		})
-
 	}
 }

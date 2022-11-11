@@ -16,7 +16,7 @@ func (sle StringListElement) Float() (float64, error) {
 	return 0, fmt.Errorf("string list element cannot be converted into float, sle: %s", sle)
 }
 
-func (sle StringListElement) String(_ bool) (string, error) {
+func (sle StringListElement) String() (string, error) {
 	return "", fmt.Errorf("string list element cannot be converted into string, sle: %s", sle)
 }
 

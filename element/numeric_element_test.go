@@ -1,7 +1,6 @@
 package element
 
 import (
-	"math"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -11,13 +10,9 @@ func TestNumericElement_String(t *testing.T) {
 	type fields struct {
 		numericElement NumericElement
 	}
-	type args struct {
-		isForce bool
-	}
 	tests := []struct {
 		name string
 		fields
-		args
 		want    string
 		wantErr bool
 	}{
@@ -29,44 +24,13 @@ func TestNumericElement_String(t *testing.T) {
 					IsNull: false,
 				},
 			},
-			args: args{
-				isForce: true,
-			},
 			want:    "99.000000",
-			wantErr: false,
-		},
-		{
-			name: "fail",
-			fields: fields{
-				numericElement: NumericElement{
-					Value:  99,
-					IsNull: false,
-				},
-			},
-			args: args{
-				isForce: false,
-			},
-			want:    "",
-			wantErr: true,
-		},
-		{
-			name: "fail (null)",
-			fields: fields{
-				numericElement: NumericElement{
-					Value:  math.NaN(),
-					IsNull: true,
-				},
-			},
-			args: args{
-				isForce: true,
-			},
-			want:    "",
 			wantErr: false,
 		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := tt.fields.numericElement.String(tt.args.isForce)
+			got, err := tt.fields.numericElement.String()
 			if diff := cmp.Diff(got, tt.want); diff != "" {
 				t.Error(diff)
 			}
@@ -75,9 +39,7 @@ func TestNumericElement_String(t *testing.T) {
 				t.Log(err)
 			}
 		})
-
 	}
-
 }
 
 func TestNumericElement_Equal(t *testing.T) {

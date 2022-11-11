@@ -23,14 +23,11 @@ func (ne NumericElement) Float() (float64, error) {
 }
 
 // String convert numeric element to string
-func (ne NumericElement) String(isForce bool) (string, error) {
-	if isForce {
-		if ne.IsNA() {
-			return "", nil
-		}
-		return fmt.Sprintf("%f", ne.Value), nil
+func (ne NumericElement) String() (string, error) {
+	if ne.IsNA() {
+		return "", nil
 	}
-	return "", fmt.Errorf("numeric element cannot be converted into string, ne.value: %f", ne.Value)
+	return fmt.Sprintf("%f", ne.Value), nil
 }
 
 // ToElements return elements which contains only one element
