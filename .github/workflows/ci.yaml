@@ -1,10 +1,12 @@
-name: Go
+name: Go CI test and coverage
 
 on:
   push:
-    branches: [ $default-branch ]
+    branches:
+      - '*'
   pull_request:
-    branches: [ $default-branch ]
+    branches:
+      - '*'
 
 jobs:
 
