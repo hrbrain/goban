@@ -3,10 +3,10 @@ package series
 import (
 	"fmt"
 
-	"github.com/gonum/floats"
-	"github.com/gonum/stat"
 	"github.com/hrbrain/goban/element"
 	"github.com/pkg/errors"
+	"gonum.org/v1/gonum/floats"
+	"gonum.org/v1/gonum/stat"
 )
 
 // Series list of same type of elements
