@@ -1,4 +1,4 @@
-name: Go CI test and coverage
+name: test
 
 on:
   push:
